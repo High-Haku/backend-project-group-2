@@ -13,7 +13,7 @@ const {
 
 router.get("/", authenticateJWT, getAll);
 router.get("/:id", getByID);
-router.post("/", addUser);
+router.post("/register", addUser);
 router.post("/login", addUserLogin);
 router.post("/:id", updateUser);
 router.delete("/:id", deleteUser);
