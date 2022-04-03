@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const accessTokenSecret = "tokenKelompok-2";
 
-const accessTokensecret = "hallo";
 module.exports = {
   getAll: async (req, res) => {
     const { role } = req.user;
@@ -26,18 +25,25 @@ module.exports = {
   },
 
   getByID: async (req, res) => {
-    const users = await userModels.findById(req.params.id);
-    try {
-      res.json({
-        message: "berhasil ambil data user",
-        data: users,
-      });
-    } catch (err) {
-      console.log(err);
-      res.status(500).send(err);
+    const { role } = req.user;
+    
+    if (role === "admin" || role === "member") {
+      const users = await userModels.findById(req.params.id);
+      try {
+        res.json({
+          message: "berhasil ambil data user",
+          data: users,
+        });
+      } catch (err) {
+        console.log(err);
+        res.status(500).send(err);
+      }
+    } else { 
+        res.send("Please, login first. Thanks");
     }
   },
 
+  //Register
   addUser: async (req, res) => {
     const data = req.body;
     const salt = bcrypt.genSaltSync(10);
@@ -85,28 +91,39 @@ module.exports = {
   updateUser: async (req, res) => {
     const id = req.params.id;
     const data = req.body;
-
-    try {
-      await userModels.findByIdAndUpdate(id, data);
-      res.json({
-        massage: `User ${id} data updated`,
-        data: data,
-      });
-    } catch (eror) {
-      res.status(500).send(eror);
+    const { role } = req.user;
+    
+    if (role === "admin" || role === "member") {
+      try {
+        await userModels.findByIdAndUpdate(id, data);
+        res.json({
+          massage: `User ${id} data updated`,
+          data: data,
+        });
+      } catch (eror) {
+        res.status(500).send(eror);
+      }
+    } else {
+        res.send("Please, login first. Thanks");
     }
   },
 
   // delete
   deleteUser: async (req, res) => {
+    const { role } = req.user;
     const id = req.params.id;
-    await userModels.deleteOne({ _id: req.params.id });
-    try {
-      res.json({
-        massage: `Success delete data ${id}`,
-      });
-    } catch (eror) {
-      res.status(500).send(eror);
+    
+    if (role === "admin" || role === "member") {
+      await userModels.deleteOne({ _id: req.params.id });
+      try {
+        res.json({
+          massage: `Success delete data ${id}`,
+        });
+      } catch (eror) {
+        res.status(500).send(eror);
+      }
+    } else {
+        res.send("Please, login first. Thanks"); 
     }
   },
 };
