@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const uri = "mongodb+srv://group2:group2@cluster0.an1ff.mongodb.net/db_flower?retryWrites=true&w=majority";
+const uri = process.env.MONGODBURI;
 
 const db = mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
