@@ -1,6 +1,6 @@
 const Product = require("./product");
 const Carts = require("./Carts");
-const Transactions = require("./transactions");
+const Transactions = require("./Transactions");
 const userModels = require("./userModels");
 const Flowers = require("./Flowers");
 
