@@ -1,5 +1,4 @@
 const express = require("express");
-const { send } = require("express/lib/response");
 const cors = require("cors");
 const db = require("./config/db");
 const allRouter = require("./routes/index");
