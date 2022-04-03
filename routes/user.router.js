@@ -12,10 +12,10 @@ const {
 } = require("../controllers/user.controller");
 
 router.get("/", authenticateJWT, getAll);
-router.get("/:id", getByID);
+router.get("/:id", authenticateJWT, getByID);
 router.post("/register", addUser);
 router.post("/login", addUserLogin);
-router.post("/:id", updateUser);
-router.delete("/:id", deleteUser);
+router.post("/:id", authenticateJWT, updateUser);
+router.delete("/:id", authenticateJWT, deleteUser);
 
 module.exports = router;
