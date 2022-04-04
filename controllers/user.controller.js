@@ -1,8 +1,8 @@
 const userModels = require("../models/userModels");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
-const accessTokenSecret = "tokenKelompok-2";
+require("dotenv").config();
+const accessTokenSecret = process.env.ACCESS
 
 module.exports = {
   getAll: async (req, res) => {
