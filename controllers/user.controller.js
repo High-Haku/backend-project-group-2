@@ -115,7 +115,7 @@ module.exports = {
     const id = req.params.id;
     
     if (role === "admin" || role === "member") {
-      await userModels.deleteOne({ _id: req.params.id });
+      await userModels.deleteOne({ _id: id });
       try {
         res.json({
           massage: `Success delete data ${id}`,
@@ -127,4 +127,19 @@ module.exports = {
         res.send("Please, login first. Thanks"); 
     }
   },
+
+  logoutUser: async (req, res) => {
+  
+    //   try {
+  //     let randomNumberToAppend = toString(Math.floor((Math.random() * 1000) + 1));
+  //     let hashedRandomNumberToAppend = await bcrypt.hash(randomNumberToAppend, 10);
+
+  //     req.token = req.token + hashedRandomNumberToAppend;
+  //     console.log(req.token)
+  //     res.status(200).json("Success Logout");
+  //   } catch (error) {
+  //     res.status(500).json("Error Logout");
+  //   }
+  // 
+  }
 };
