@@ -9,6 +9,7 @@ const {
   addUserLogin,
   updateUser,
   deleteUser,
+  logoutUser
 } = require("../controllers/user.controller");
 
 router.get("/", authenticateJWT, getAll);
