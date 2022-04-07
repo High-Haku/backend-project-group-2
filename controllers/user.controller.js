@@ -2,8 +2,7 @@ const userModels = require("../models/userModels");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-
-const accessTokenSecret = process.env.ACCESS;
+const accessTokenSecret = process.env.ACCESS
 
 module.exports = {
   getAll: async (req, res) => {
